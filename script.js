@@ -8,11 +8,11 @@ const BtnDelAll = document.getElementById("delallusers");
 BtnAllusers.addEventListener("click", () => {
   document.getElementById("tbod").textContent = ""
   axios
-    .get("http:/localhost:3000/users")
+    .get("http://localhost:3000/users")
     .then((response) => {
       dataUsers = response.data;
-      //console.log(dataUsers);
-      if (dataUsers.length === 0) {
+      console.log(dataUsers);
+       if (dataUsers.length === 0) {
         alert("Please Create a User first!!");
       } else {
         for (i = 0; i < dataUsers.length; i++) {
@@ -22,12 +22,38 @@ BtnAllusers.addEventListener("click", () => {
           let td1 = document.createElement("td");
           let td2 = document.createElement("td");
           let td3 = document.createElement("td");
+
+ 
+          let btn1edit = document.createElement('button')
+          btn1edit.textContent = "EDIT"
+          let btn2delete = document.createElement('button')
+          btn2delete.textContent = "DELETE"
+
+          let td4 = document.createElement("td");
+          let td5 = document.createElement("td");
+          let td6 = document.createElement("td");
+          let td7 = document.createElement("td")
+          let td8 = document.createElement("td")
+
+
           td1.appendChild(document.createTextNode(dataUsers[i].name));
           td2.appendChild(document.createTextNode(dataUsers[i].email));
           td3.appendChild(document.createTextNode(dataUsers[i].address));
+          td4.appendChild(document.createElement("INPUT"))
+          td5.appendChild(document.createElement("INPUT"))
+          td6.appendChild(document.createElement("INPUT"))
+          td7.appendChild(btn1edit)
+          td8.appendChild(btn2delete)
+
+
           trUsers.appendChild(td1);
           trUsers.appendChild(td2);
           trUsers.appendChild(td3);
+          trUsers.appendChild(td7);
+          trUsers.appendChild(td8);
+          trUsers.appendChild(td4);
+          trUsers.appendChild(td5);
+          trUsers.appendChild(td6);
           document.getElementById("tbod").appendChild(trUsers);
         }
       }
@@ -104,7 +130,7 @@ BtnEdit.addEventListener("click", () => {
     })
     .then((response) => {
       alert('User Updated Successfully')
-      console.log(response.data + response.status);
+      console.log(response.data);
     })
     .catch((error) => {
       console.log(error);

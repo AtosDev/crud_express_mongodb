@@ -49,7 +49,8 @@
 //const schema = mongoose.Schema;
 //const UserSchema = new schema({
 //   name:{
-//             type: String,
+//             type: String,       //String is called the schema type, basically it means database types but it have specific name assigned to it 
+                                   //various different schema types can be found in mongoose schema types docs
 //             required: true         //that means this field is required for user documents
 //    },
 //    age: {
@@ -72,6 +73,8 @@
 //    User.save() // we used a method called save() on the model User, here we actually saved an instance of the model in the database
 //       .then((result) => { res.send(result); })
 //       .catch((err) => console.log(err))
+
+//           we can use either callbacks, response or async and await inside methods
 //})
 
 //--------------------------------------------------------//
