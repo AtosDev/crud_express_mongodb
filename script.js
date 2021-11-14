@@ -103,7 +103,7 @@ Btnuser.addEventListener("click", () => {
   let InpgetUser = document.getElementById("get_user").value;
   document.getElementById("tbod").textContent = ""
   axios
-    .get(`https://crud-express-mongodb-basic.herokuapp.com/${InpgetUser}`)
+    .get(`https://crud-express-mongodb-basic.herokuapp.com/user/${InpgetUser}`)
     .then((response) => {
       //console.log(response.data);
       datauser = response.data;
@@ -132,7 +132,7 @@ Btnuser.addEventListener("click", () => {
   let editEmai = document.getElementById("Edem").value;
   let editAddr = document.getElementById("EdAddr").value;
   axios
-    .put(`https://crud-express-mongodb-basic.herokuapp.com/${editid}`, {
+    .put(`https://crud-express-mongodb-basic.herokuapp.com/user/${editid}`, {
       name: editNam,
       email: editEmai,
       address: editAddr,
@@ -151,7 +151,7 @@ Btnuser.addEventListener("click", () => {
 
 function DELETE(editid){
   axios
-  .delete(`https://crud-express-mongodb-basic.herokuapp.com/${editid}`)
+  .delete(`https://crud-express-mongodb-basic.herokuapp.com/user/${editid}`)
   .then((response) => {
     alert("User Deleted Succesfully")
     console.log(response.data +" "+ response.status);
@@ -165,7 +165,7 @@ function DELETE(editid){
 BtnDel.addEventListener("click", () => {
   const DeleID = document.getElementById("delid").value;
   axios
-    .delete(`https://crud-express-mongodb-basic.herokuapp.com/${DeleID}`)
+    .delete(`https://crud-express-mongodb-basic.herokuapp.com/user/${DeleID}`)
     .then((response) => {
       alert("User Deleted Succesfully")
       console.log(response.data +" "+ response.status);
