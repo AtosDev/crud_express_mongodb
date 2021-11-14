@@ -1,7 +1,7 @@
 const BtnAllusers = document.getElementById("getusers");
 const Btnuser = document.getElementById("getuser-id");
 const Btncreate = document.getElementById("postuser");
-const BtnEdit = document.getElementById("putuser-id");
+//const BtnEdit = document.getElementById("putuser-id");
 const BtnDel = document.getElementById("deluser-id");
 const BtnDelAll = document.getElementById("delallusers");
 
@@ -18,45 +18,50 @@ BtnAllusers.addEventListener("click", () => {
         for (i = 0; i < dataUsers.length; i++) {
           //This loop, will loop over the all the available users.
           //console.log(dataUsers[i]); //will give us all the available users in console
+
+          let iddata = dataUsers[i]
+          //console.log(iddata);
+
+          //console.log(dataUsers[i]._id);
+
+
           let trUsers = document.createElement("tr");
           let td1 = document.createElement("td");
           let td2 = document.createElement("td");
           let td3 = document.createElement("td");
 
  
-          let btn1edit = document.createElement('button')
+          var btn1edit = document.createElement('button')
           btn1edit.textContent = "EDIT"
-          let btn2delete = document.createElement('button')
-          btn2delete.textContent = "DELETE"
+          btn1edit.addEventListener('click', function() { EDIT(iddata._id) })
 
-          let td4 = document.createElement("td");
-          let td5 = document.createElement("td");
-          let td6 = document.createElement("td");
-          let td7 = document.createElement("td")
-          let td8 = document.createElement("td")
+          var btn2delete = document.createElement('button')
+          btn2delete.textContent = "DELETE"
+          //btn2delete.onclick = () => { DELETE(dataUsers[i]._id) } 
+          btn2delete.onclick = function () { DELETE(iddata._id) }
+
+          let td4 = document.createElement("td")
+          let td5 = document.createElement("td")
 
 
           td1.appendChild(document.createTextNode(dataUsers[i].name));
           td2.appendChild(document.createTextNode(dataUsers[i].email));
           td3.appendChild(document.createTextNode(dataUsers[i].address));
-          td4.appendChild(document.createElement("INPUT"))
-          td5.appendChild(document.createElement("INPUT"))
-          td6.appendChild(document.createElement("INPUT"))
-          td7.appendChild(btn1edit)
-          td8.appendChild(btn2delete)
+          td4.appendChild(btn1edit)
+          td5.appendChild(btn2delete)
 
 
           trUsers.appendChild(td1);
           trUsers.appendChild(td2);
           trUsers.appendChild(td3);
-          trUsers.appendChild(td7);
-          trUsers.appendChild(td8);
           trUsers.appendChild(td4);
           trUsers.appendChild(td5);
-          trUsers.appendChild(td6);
           document.getElementById("tbod").appendChild(trUsers);
+          //console.log(dataUsers[i]._id);
         }
+
       }
+      //console.log(ID);
       //console.log(response.data); giving us the response data means the empty bracket
       //console.log(dataUsers[0]); giving us the first user, which have index 0.
     })
@@ -64,6 +69,7 @@ BtnAllusers.addEventListener("click", () => {
       console.log(error);
     });
 });
+
 
 Btncreate.addEventListener("click", () => {
   let inpName = document.getElementById("crN").value;
@@ -88,6 +94,9 @@ Btncreate.addEventListener("click", () => {
       alert("Enter All fields Correctly Please!!");
       console.log(error);
     });
+    document.getElementById("crN").value = ""
+    document.getElementById("crE").value = ""
+    document.getElementById("crA").value = ""
 });
 
 Btnuser.addEventListener("click", () => {
@@ -117,8 +126,8 @@ Btnuser.addEventListener("click", () => {
     });
 });
 
-BtnEdit.addEventListener("click", () => {
-  let editid = document.getElementById("Edid").value;
+
+ function EDIT(editid) {
   let editNam = document.getElementById("Edna").value;
   let editEmai = document.getElementById("Edem").value;
   let editAddr = document.getElementById("EdAddr").value;
@@ -135,7 +144,24 @@ BtnEdit.addEventListener("click", () => {
     .catch((error) => {
       console.log(error);
     });
-});
+  document.getElementById("Edna").value = ""
+  document.getElementById("Edem").value = ""
+  document.getElementById("EdAddr").value = ""
+}
+
+function DELETE(editid){
+  axios
+  .delete(`http://localhost:3000/user/${editid}`)
+  .then((response) => {
+    alert("User Deleted Succesfully")
+    console.log(response.data +" "+ response.status);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
+
 BtnDel.addEventListener("click", () => {
   const DeleID = document.getElementById("delid").value;
   axios
@@ -148,6 +174,7 @@ BtnDel.addEventListener("click", () => {
       console.log(error);
     });
 });
+
 BtnDelAll.addEventListener("click", () => {
   axios
     .delete("http://localhost:3000/userdelall")
