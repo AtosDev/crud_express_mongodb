@@ -1,6 +1,6 @@
 body {
     -webkit-font-smoothing: antialiased;
-    background-image: url("crud-express-mongodb/img-svgs/background-img.jpg");
+    background-image: url(/img-svgs/background-img.jpg);
     height: 100%;
     width: 100%;
     background-size: cover;   
