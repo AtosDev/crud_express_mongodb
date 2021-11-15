@@ -1,8 +1,5 @@
 const BtnAllusers = document.getElementById("getusers");
-const Btnuser = document.getElementById("getuser-id");
 const Btncreate = document.getElementById("postuser");
-//const BtnEdit = document.getElementById("putuser-id");
-const BtnDel = document.getElementById("deluser-id");
 const BtnDelAll = document.getElementById("delallusers");
 
 BtnAllusers.addEventListener("click", () => {
@@ -99,43 +96,15 @@ Btncreate.addEventListener("click", () => {
     document.getElementById("crA").value = ""
 });
 
-Btnuser.addEventListener("click", () => {
-  let InpgetUser = document.getElementById("get_user").value;
-  document.getElementById("tbod").textContent = ""
-  axios
-    .get(`https://crud-express-mongodb-basic.herokuapp.com/user/${InpgetUser}`)
-    .then((response) => {
-      //console.log(response.data);
-      datauser = response.data;
-      //console.log(datauser);
-      let trUsers = document.createElement("tr");
-      let td1 = document.createElement("td");
-      let td2 = document.createElement("td");
-      let td3 = document.createElement("td");
-      td1.appendChild(document.createTextNode(datauser.name));
-      td2.appendChild(document.createTextNode(datauser.email));
-      td3.appendChild(document.createTextNode(datauser.address));
-      trUsers.appendChild(td1);
-      trUsers.appendChild(td2);
-      trUsers.appendChild(td3);
-      document.getElementById("tbod").appendChild(trUsers);
-    })
-    .catch((error) => {
-      alert(`${error}, User doesn't Exist`)
-      console.log(error);
-    });
-});
-
-
  function EDIT(editid) {
-  let editNam = document.getElementById("Edna").value;
-  let editEmai = document.getElementById("Edem").value;
-  let editAddr = document.getElementById("EdAddr").value;
+  let inpName = document.getElementById("crN").value;
+  let inpEmail = document.getElementById("crE").value;
+  let inpAddr = document.getElementById("crA").value;
   axios
     .put(`https://crud-express-mongodb-basic.herokuapp.com/user/${editid}`, {
-      name: editNam,
-      email: editEmai,
-      address: editAddr,
+      name: inpName,
+      email: inpEmail,
+      address: inpAddr,
     })
     .then((response) => {
       alert('User Updated Successfully')
@@ -144,9 +113,9 @@ Btnuser.addEventListener("click", () => {
     .catch((error) => {
       console.log(error);
     });
-  document.getElementById("Edna").value = ""
-  document.getElementById("Edem").value = ""
-  document.getElementById("EdAddr").value = ""
+    document.getElementById("crN").value = ""
+    document.getElementById("crE").value = ""
+    document.getElementById("crA").value = ""
 }
 
 function DELETE(editid){
@@ -161,19 +130,6 @@ function DELETE(editid){
   });
 }
 
-
-BtnDel.addEventListener("click", () => {
-  const DeleID = document.getElementById("delid").value;
-  axios
-    .delete(`https://crud-express-mongodb-basic.herokuapp.com/user/${DeleID}`)
-    .then((response) => {
-      alert("User Deleted Succesfully")
-      console.log(response.data +" "+ response.status);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
 
 BtnDelAll.addEventListener("click", () => {
   axios
