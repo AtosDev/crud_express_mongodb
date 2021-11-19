@@ -33,7 +33,7 @@
           <button id="postuser">Create a User</button>
         </div>
       </container>
-
+      
       <section class="user-table">
         <h2>Available Users</h2>
         <div class="table-form">
@@ -45,6 +45,7 @@
                 <th><h1>User Address</h1></th>
                 <th><h1>EDIT</h1></th>
                 <th><h1>DELETE</h1></th>
+                <th><h1>ID</h1></th>
               </tr>
             </thead>
             <tbody id="tbod"></tbody>
@@ -52,6 +53,19 @@
         </div>
       </section>
     </main>
+
+  <div class="bg-modal">
+    <div id="display" class="modal-content">
+      <div class="cross">+</div>
+      <h3>Name</h3>
+      <input type="text" class="inp-modal" id="upName">
+      <h3>Email</h3>
+      <input type="email" class="inp-modal" id="upEmail">
+      <h3>Address</h3>
+      <input type="text" class="inp-modal" id="upAddress">
+      <button class="update">UPDATE</button>
+    </div>
+  </div>
 
     <script src="script.js"></script>
   </body>

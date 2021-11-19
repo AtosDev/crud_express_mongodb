@@ -1,12 +1,72 @@
 body {
     -webkit-font-smoothing: antialiased;
-    background-image: url('img-svgs/background-img.jpg');
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-image: url('img-svgs/teahub.io-galaxy-wallpaper-1080p-945540.png');
     height: 100%;
     width: 100%;
     background-size: cover;   
-    background-position: center;
+    background-position: top center;
     background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
+    transform:translatez(0);
+    -webkit-transform:translatez(0);
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(233, 162, 162);
+}
+
+body::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.bg-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7) ;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.modal-content {
+  width: 50%;
+  height: 40%;
+  border-radius: 20px;
+  background-color: gray ;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+}
+
+.inp-modal {
+  width: 40%;
+  height: 12px;
+  display: block;
+  margin: 15px auto;
+}
+
+.cross{
+  position: absolute;
+  top: 0;
+  right: 14px;
+  font-size: 55px;
+  transform: rotate(45deg);
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.update {
+  margin-top: 50px;
+  width: 20%;
 }
 
 #create {
@@ -47,7 +107,6 @@ button {
     border-radius: 10px;
     border: 5px solid rgba(255,255,255,0.2);
     color: rgba(255,255,255,0.8);
-    transition: all 0.5s;
 }
 
 button:hover {
@@ -84,13 +143,14 @@ input {
     box-shadow: 2px 2px 2px 2px ;
     border-image-slice: 1;
     border-width: 5px;
+    transition: all 0.5s;
 }
 
 input:hover {
-    border: 2px solid rgba(189, 23, 11, 0.5);
+    border: 3px solid rgba(189, 23, 11, 0.5);
 }
 input:focus {
-    border: 2px solid rgba(199, 35, 35, 0.5);
+    border: 3px solid rgba(199, 35, 35, 0.5);
     background: linear-gradient(to left top, rgba(0, 0, 0, 0), #5c3a79) fixed;
   }
 
