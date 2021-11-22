@@ -1,11 +1,12 @@
 const BtnAllusers = document.getElementById("getusers");
 const Btncreate = document.getElementById("postuser");
 const BtnDelAll = document.getElementById("delallusers");
+
 let users;
 
 BtnAllusers.addEventListener("click", () => {
   document.getElementById("tbod").textContent = "";
-  tableShowUser()
+  tableShowUser();
 });
 
 Btncreate.addEventListener("click", () => {
@@ -28,7 +29,7 @@ Btncreate.addEventListener("click", () => {
     .then((response) => {
       alert(`USER is added `);
       console.log(response.data);
-      tableShowUser()
+      tableShowUser();
     })
     .catch((error) => {
       alert(`Input All Fields, ${error}`);
@@ -37,14 +38,14 @@ Btncreate.addEventListener("click", () => {
   document.getElementById("crN").value = "";
   document.getElementById("crE").value = "";
   document.getElementById("crA").value = "";
-/*   setTimeout(() => {
+  /*   setTimeout(() => {
     tableShowUser();
   }, 1000); */
 });
 
-function inp(id, index){
-  let singUser = users[index]
-  document.querySelector('.bg-modal').setAttribute = (id, `${id}`)
+function inp(id, index) {
+  let singUser = users[index];
+  document.querySelector(".bg-modal").setAttribute = (id, `${id}`);
   document.querySelector(".bg-modal").textContent = `
   <div id="display" class="modal-content">
   <div class="cross">+</div>
@@ -56,15 +57,13 @@ function inp(id, index){
   <input type="text" class="inp-modal" id="upAddress">
   <button class="update">UPDATE</button>
 </div>
-`
+`;
 
- /*  document.getElementById("upName").ariaPlaceholder = 
+  /*  document.getElementById("upName").ariaPlaceholder = 
   let name = document.getElementById("upName").value;
   let email = document.getElementById("upEmail").value;
   let address = document.getElementById("upAddress").value; */
-  
 }
-
 
 function upDATE(id) {
   console.log(id);
@@ -83,7 +82,9 @@ function upDATE(id) {
       .then((response) => {
         alert("User Updated Successfully");
         console.log(response.data);
-        tableShowUser()
+        setTimeout(() => {
+          tableShowUser();
+        }, 0)
       })
       .catch((error) => {
         console.log(error);
@@ -93,9 +94,9 @@ function upDATE(id) {
     document.getElementById("upName").value = "";
     document.getElementById("upEmail").value = "";
     document.getElementById("upAddress").value = "";
-  },2000)
+  }, 2000);
   cLose();
-/*   setTimeout(() => {
+  /*   setTimeout(() => {
     tableShowUser();
   }, 1000); */
 }
@@ -109,35 +110,40 @@ function editwindow() {
   document.querySelector(".bg-modal").style.display = "flex";
 }
 
+
 function tableShowUser() {
   document.getElementById("tbod").textContent = "";
   document.getElementById("tbod").innerText = "";
+  const updBtn = document.querySelector(".update");
+
   axios
     .get("https://crud-express-mongodb-basic.herokuapp.com/users")
     .then((response) => {
       dataUsers = response.data;
-      console.log(dataUsers);
+      //console.log(dataUsers);
       if (dataUsers.length === 0) {
         alert("Please Create a User first!!");
       } else {
         dataUsers.map((item, index) => {
-          console.log(index, " ", item);
+         //console.log(index, " ", item);
           let iddata = item;
-          console.log(iddata._id);
-          console.log(iddata, index);
-          var id = item._id
-          console.log(id);
+          //let serial = index
+         // console.log(serial);
+          //console.log(iddata._id);
+          //console.log(iddata, serial);
+          var id = item._id;
+          //console.log(id);
 
           let trUsers = document.createElement("tr");
           let td1 = document.createElement("td");
-          td1.id = `${id}_userName`
+          td1.id = `${id}_userName`;
           let td2 = document.createElement("td");
-          td2.id = `${id}_Useremail`
+          td2.id = `${id}_Useremail`;
           let td3 = document.createElement("td");
-          td3.id = `${id}_Useraddress`
+          td3.id = `${id}_Useraddress`;
           let td4 = document.createElement("td");
           let td5 = document.createElement("td");
-          let td6 = document.createElement('td');
+          let td6 = document.createElement("td");
 
           var btn1edit = document.createElement("button");
           btn1edit.textContent = "EDIT";
@@ -146,13 +152,17 @@ function tableShowUser() {
           btn2delete.textContent = "DELETE";
 
           btn1edit.addEventListener("click", () => {
-            editwindow();
+            editwindow()
+            console.log(index);
+            updBtn.addEventListener("click",function () {
+              upDATE(iddata._id,index)
+            });
           });
 
-          console.log(td1);
-          console.log(td2);
-          console.log(td3);
-  
+          //console.log(td1);
+          //console.log(td2);
+          //console.log(td3);
+
           td1.appendChild(document.createTextNode(item.name));
           td2.appendChild(document.createTextNode(item.email));
           td3.appendChild(document.createTextNode(item.address));
@@ -165,17 +175,13 @@ function tableShowUser() {
           trUsers.appendChild(td3);
           trUsers.appendChild(td4);
           trUsers.appendChild(td5);
-          trUsers.appendChild(td6)
+          trUsers.appendChild(td6);
           document.getElementById("tbod").appendChild(trUsers);
-
-          document.querySelector(".update").addEventListener("click", () => {
-            upDATE(`${item._id}`);
-          });
 
           btn2delete.onclick = function () {
             DELETE(`${item._id}`);
           };
-        })
+        });
       }
     })
     .catch((error) => {
@@ -183,13 +189,15 @@ function tableShowUser() {
     });
 }
 
+//console.log(btn1edit);
+
 function DELETE(id) {
   axios
     .delete(`https://crud-express-mongodb-basic.herokuapp.com/user/${id}`)
     .then((response) => {
       alert("User Deleted Succesfully");
       console.log(response.data + " " + response.status);
-      tableShowUser()
+      tableShowUser();
     })
     .catch((error) => {
       console.log(error);
@@ -203,24 +211,13 @@ BtnDelAll.addEventListener("click", () => {
       alert("All User Deleted Successfully");
       console.log(response.data + " " + response.status);
       setTimeout(() => {
-        tableShowUser()
-      },1000)
+        document.getElementById("tbod").innerText = "";
+      }, 1000);
     })
     .catch((error) => {
       console.log(error);
     });
 });
-
-
-
-
-
-
-
-
-
-
-
 
 //----------------------------------------------------------------------------------------------//
 
@@ -290,4 +287,3 @@ BtnDelAll.addEventListener("click", () => {
   console.log(error);
 });
  */
-
