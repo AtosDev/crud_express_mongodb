@@ -6,7 +6,9 @@ let users;
 
 BtnAllusers.addEventListener("click", () => {
   document.getElementById("tbod").textContent = "";
+  setTimeout(() => {
   tableShowUser();
+  },1000)
 });
 
 Btncreate.addEventListener("click", () => {
@@ -80,11 +82,13 @@ function upDATE(id) {
         address, //if value pairs have same name then we can write it like this
       })
       .then((response) => {
-        alert("User Updated Successfully");
-        console.log(response.data);
         setTimeout(() => {
-          tableShowUser();
-        }, 0)
+          alert("User Updated Successfully");
+          console.log(response.data);
+          setTimeout(() => {
+            tableShowUser();
+          }, 1000);
+        },1000);
       })
       .catch((error) => {
         console.log(error);
@@ -110,7 +114,6 @@ function editwindow() {
   document.querySelector(".bg-modal").style.display = "flex";
 }
 
-
 function tableShowUser() {
   document.getElementById("tbod").textContent = "";
   document.getElementById("tbod").innerText = "";
@@ -125,10 +128,10 @@ function tableShowUser() {
         alert("Please Create a User first!!");
       } else {
         dataUsers.map((item, index) => {
-         //console.log(index, " ", item);
+          //console.log(index, " ", item);
           let iddata = item;
           //let serial = index
-         // console.log(serial);
+          // console.log(serial);
           //console.log(iddata._id);
           //console.log(iddata, serial);
           var id = item._id;
@@ -152,10 +155,10 @@ function tableShowUser() {
           btn2delete.textContent = "DELETE";
 
           btn1edit.addEventListener("click", () => {
-            editwindow()
+            editwindow();
             console.log(index);
-            updBtn.addEventListener("click",function () {
-              upDATE(iddata._id,index)
+            updBtn.addEventListener("click", function () {
+              upDATE(iddata._id, index);
             });
           });
 
