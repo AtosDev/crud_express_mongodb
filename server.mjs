@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 //it will create a <database_name> of that name if the name doesn't exist.
 
 //                 put the url in enviornment variable named mongoURI
-mongoose.connect('mongodb+srv://faiq:faiqkhan@11nov21cluster1.lxgo4.mongodb.net/crud-mongodb?retryWrites=true&w=majority')  //using this one, it doesn't give out deprecating url warnings
+mongoose.connect('mongodb+srv://dbuser:dbpassword@11nov21cluster1.lxgo4.mongodb.net/crud-mongodb?retryWrites=true&w=majority')  //using this one, it doesn't give out deprecating url warnings
     .then(() => console.log("Connected to the Database"))
     .catch(err => console.log(err));         
  
